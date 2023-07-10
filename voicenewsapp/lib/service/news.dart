@@ -17,7 +17,7 @@ class News {
   var jsonData =jsonDecode(response.body);
 
   if (jsonData['status'] =='ok') {
-    jsonData.forEach((element){
+    jsonData['articles'].forEach((element){
       Article article =Article(
         title:element ['title'], 
         author: element['author'], 

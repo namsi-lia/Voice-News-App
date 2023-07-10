@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:voicenewsapp/screens/homescreen.dart';
 
@@ -17,7 +16,7 @@ class _SplashscreenState extends State<Splashscreen> {
     return MaterialApp(
      home: AnimatedSplashScreen(
       splash:Image.asset('assets/newslogo.png'), 
-      nextScreen: HomeScreen(),
+      nextScreen: const HomeScreen(),
       splashTransition: SplashTransition.fadeTransition,
       duration: 3000,
       ),
