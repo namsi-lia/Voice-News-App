@@ -10,7 +10,7 @@ String headline ='top-headlines';
 class ApiService {
  
     String endpoint =
-    "https://newsapi.org/v2/${headline}?country=de&category=business&apiKey=${apiKey}";
+    "https://newsapi.org/v2/${headline}?country=us&apiKey=${apiKey}";
 
     Future<List<News>> getNews() async {
     Response response = await get(Uri.parse(endpoint));
