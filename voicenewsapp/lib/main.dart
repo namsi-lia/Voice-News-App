@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:voicenewsapp/screens/splashscreen.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(child: MyApp())
+    
+    );
 }
 
 
@@ -14,9 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Voice News App',
-      debugShowCheckedModeBanner:false,
-     
-       home:Splashscreen(),
+      home:Splashscreen(),
+      debugShowCheckedModeBanner:false, 
     );
   }
 }
