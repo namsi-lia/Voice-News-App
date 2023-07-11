@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voicenewsapp/service/news.dart';
-import 'package:voicenewsapp/widgets/searchwidget.dart';
+import 'package:voicenewsapp/service/apiservice.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
-  bool? loadingInProgress;
+  late bool loadingInProgress ;
   var newsList;
 
 
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     News news =News();
     await news.getNews();
     setState(() {
-      loadingInProgress=false;
+      loadingInProgress =false;
       newsList =news.news;
     });
   }
@@ -34,29 +34,36 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(padding: const EdgeInsets.all(20.0),
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Discover',
+      body: SafeArea(
+        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: loadingInProgress
+         ?const Center(
+          child: Text('Loading'),
+
+         )
+         :Column(
+           children:<Widget> [
+            Row(
+              children: const <Widget>[
+                Text('Top Headlines',
           style: TextStyle(fontSize: 32.0,
           fontWeight: FontWeight.bold,
           ),
           ),
-          SizedBox(height: 10.0,),
-          Text('Top headlines from all over the world',
-          style: TextStyle(
-            color: Colors.blueGrey,
-          ),
-          
-          ),
-          SizedBox(height: 20.0,),
-
-          SearchWidget(),
-
         ],
-      ),
-      
+        ),
+        Divider(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder:(context, index){
+                return ListTile(
+                 title: Text(newsList[index].title),
+                );
+              }),
+          )
+           ],
+         ),
+        ),
       ),
     );
   }
